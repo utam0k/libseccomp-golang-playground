@@ -1,0 +1,9 @@
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - init: |
+      go get github.com/seccomp/libseccomp-golang@3879420cc921
+      go build
+vscode:
+  extensions:
+    - golang.go

@@ -11,10 +11,7 @@ func main() {
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
-	// TODO(toru): When I try to apply umount to ActNotify, I encounter the following error.
-	// panic: numerical argument out of domain
-	// var syscalls = []string{"mount", "umount", "umount2", "bind", "chown"}
-	var syscalls = []string{"mount", "umount2", "bind", "chown"}
+	var syscalls = []string{"mount", "umount", "umount2", "bind", "chown"}
 	filter, err := libseccomp.NewFilter(libseccomp.ActAllow)
 	if err != nil {
 		panic(err)
@@ -34,7 +31,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		err = filter.AddRuleExact(syscallID, libseccomp.ActNotify)
+		err = filter.AddRule(syscallID, libseccomp.ActNotify)
 		if err != nil {
 			panic(err)
 		}

@@ -1,0 +1,3 @@
+[submodule "libseccomp-golang"]
+	path = libseccomp-golang
+	url = https://github.com/utam0k/libseccomp-golang.git

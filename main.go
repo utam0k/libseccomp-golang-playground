@@ -2,13 +2,19 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 
 	libseccomp "github.com/seccomp/libseccomp-golang"
 )
 
 func main() {
+	runtime.LockOSThread()
 	var syscalls = []string{"mount"}
 	filter, err := libseccomp.NewFilter(libseccomp.ActAllow)
+	if err != nil {
+		panic(err)
+	}
+	err = filter.SetTsync(false)
 	if err != nil {
 		panic(err)
 	}
